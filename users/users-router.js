@@ -1,4 +1,4 @@
-const express = require('exxpress')
+const express = require('express')
 
 const router = express.Router()
 
@@ -60,3 +60,5 @@ router.get('/',(req,res) => {
 router.use((err, req, res, next) => {
     res.status(err.code).json({ message: err.message })
 });
+
+module.exports = router

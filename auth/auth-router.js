@@ -30,7 +30,7 @@ router.post("/register", (req, res) => {
       });
   } else {
     res.status(400).json({
-      message: "please provide username and password and the password shoud be alphanumeric",
+      message: "credentials are invalid",
     });
   }
 });
@@ -42,8 +42,8 @@ router.post("/login", (req, res) => {
     Users.findBy({ username: username })
       .then(([user]) => {
         if (user && bcryptjs.compareSync(password, user.password)) {
-          const token = makeToken(user) // make token
-          res.status(200).json({ message: "Welcome to our API", token }); // send it back
+          const token = makeToken(user) 
+          res.status(200).json({ message: "Welcome to our API", token }); 
         } else {
           res.status(401).json({ message: "Invalid credentials" });
         }
@@ -53,7 +53,7 @@ router.post("/login", (req, res) => {
       });
   } else {
     res.status(400).json({
-      message: "please provide username and password and the password shoud be alphanumeric",
+      message: "credentials are invalid",
     });
   }
 });
