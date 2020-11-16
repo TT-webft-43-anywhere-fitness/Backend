@@ -40,5 +40,5 @@ function getByInstructor(instructorId){
 // find a class with the specified id
 //Joins the attendees that match
 function findById(id) {
-  return null;
+  return db("classes").where({id}).first();
 }

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`classes model insert(newClass) posts a new class and returns the new class 1`] = `
+Object {
+  "class_name": "test name",
+  "end_time": "09:00",
+  "id": 1,
+  "instructor_id": null,
+  "intensity": 5,
+  "location": "test location",
+  "max_size": 9,
+  "num_attendies": 5,
+  "start_time": "08:00",
+  "type": "test type",
+}
+`;
