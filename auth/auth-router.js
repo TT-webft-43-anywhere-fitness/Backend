@@ -9,7 +9,21 @@ const { isValid } = require("../users/users-service.js");
 // pull in the secret we'll use to make the JWT
 const { jwtSecret } = require('./secrets.js');
 
-router.post("/register", (req, res) => {
+
+
+const validateBody = (req,res,next) => {
+    const body = req.body
+
+    if (!body){
+        next({code:400, message: "you must have a username, password, and a role"})
+    }else{
+        req.bodyObj = body
+        next()
+    }
+}
+
+
+router.post("/register", validateBody, (req, res) => {
   const credentials = req.body;
 
   if (isValid(credentials)) {
@@ -35,7 +49,7 @@ router.post("/register", (req, res) => {
   }
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", validateBody, (req, res) => {
   const { username, password } = req.body;
 
   if (isValid(req.body)) {

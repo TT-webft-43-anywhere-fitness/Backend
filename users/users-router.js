@@ -18,10 +18,10 @@ function roleChecker(role) {
 const validateId = (req,res,next) => {
     const id = req.params.id
     
-    Project.get(id)
+    Users.get(id)
     .then(data => {
         if (data) {
-            req.project = data;
+            req.userObj = data;
             next()
         }else{
             next({ code: 400, message: 'There is no user with id ' + id })
@@ -35,10 +35,10 @@ const validateId = (req,res,next) => {
 const validateBody = (req,res,next) => {
     const body = req.body
 
-    if (!body.description || !body.name){
-        next({code:400, message: "you must have a description and name"})
+    if (!body){
+        next({code:400, message: "you must have a username, password, and a role"})
     }else{
-        req.payload = body
+        req.bodyObj = body
         next()
     }
 }
