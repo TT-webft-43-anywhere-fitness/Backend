@@ -13,6 +13,7 @@ module.exports = {
 async function insert(newClass) {
   const [id] = await db('classes').insert(newClass)
   return db('classes').where({ id }).first()
+  // return await db('classes').insert(newClass)
 }
 
 //async, updates the class based on the id sent in and the changes

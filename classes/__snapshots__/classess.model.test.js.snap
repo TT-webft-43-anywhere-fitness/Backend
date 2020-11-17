@@ -4,12 +4,12 @@ exports[`classes model insert(newClass) posts a new class and returns the new cl
 Object {
   "class_name": "test name",
   "end_time": "09:00",
+  "enrolled": 5,
   "id": 1,
-  "instructor_id": null,
+  "instructor_id": 1,
   "intensity": 5,
   "location": "test location",
   "max_size": 9,
-  "num_attendies": 5,
   "start_time": "08:00",
   "type": "test type",
 }

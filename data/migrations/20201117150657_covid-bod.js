@@ -23,7 +23,6 @@
         classId
         userId
 */
-const { table } = require("../dbConfig");
 
 exports.up = function(knex) {
     return knex.schema
@@ -38,7 +37,7 @@ exports.up = function(knex) {
         tbl.string("username", 128).notNullable().unique().index();
         tbl.string("password", 256).notNullable();
     
-        tbl.integer("role")
+        tbl.integer("role",128)
             .unsigned()
             .references("roles.id")
             .onDelete("RESTRICT")
@@ -46,31 +45,33 @@ exports.up = function(knex) {
     })
     .createTable("classes", tbl => {
         tbl.increments();
-        tbl.string("class_name",)
+        tbl.string("class_name",128)
             .notNullable()
             .unique()
             .index();
-        tbl.string("type").notNullable();
-        tbl.time('start_time').notNullable();
-        tbl.time("end_time").notNullable();
-        tbl.integer("intensity").unsigned().notNullable();
-        tbl.string("location").notNullable();
-        tbl.integer("num_attendies").unsigned().notNullable();
-        tbl.integer("max_size").unsigned().notNullable();
-        tbl.integer("instructor_id")
+        tbl.string("type",128).notNullable();
+        tbl.time('start_time',128).notNullable();
+        tbl.time("end_time",128).notNullable();
+        tbl.integer("intensity",128).unsigned().notNullable();
+        tbl.string("location",128).notNullable();
+        tbl.integer("enrolled",128).unsigned().notNullable();
+        tbl.integer("max_size",128).unsigned().notNullable();
+        tbl.integer("instructor_id",128)
+            .notNullable()
             .unsigned()
-            .references("users.id")
+            .references("id")
+            .inTable('users')
             .onDelete("RESTRICT")
             .onUpdate("CASCADE");
     })
     .createTable("attendees_by_class", tbl => {
         tbl.increments();
-        tbl.integer("class_id")
+        tbl.integer("class_id",128)
             .unsigned()
             .references("classes.id")
             .onDelete("RESTRICT")
             .onUpdate("CASCADE");
-        tbl.integer("user_id")
+        tbl.integer("user_id",128)
             .unsigned()
             .references("users.id")
             .onDelete("RESTRICT")

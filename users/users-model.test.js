@@ -8,9 +8,20 @@ beforeEach(async () => {
 
 const doug = {username:"Doug", password:"guest", role:1}
 const archer = {username:"Archer", password:"guest"}
+const sample = {
+    "class_name":"test name",
+    "type":"test type",
+    "start_time": "08:00",
+    "end_time":"09:00",
+    "intensity":5,
+    "location":"test location",
+    "enrolled":5,
+    "max_size":9,
+    "instructor_id":1
+}
 
 describe('users model', () => {
-    describe('find()', () => {
+    describe('getAll()', () => {
         it('returns an empty array', async () => {
             const users = await User.getAll()
             // console.log("THIS IS THE RESULT OF USERS ===>",users)
@@ -44,6 +55,20 @@ describe('users model', () => {
         });
         
     });
+
+    // describe('findClassesByInstructor(instrutorId)', () => {
+    //     it('finds classes that an instructor has. ', async () => {
+    //         const dougTest = await db('users').insert(doug)
+
+    //         const newClass = await db('classes').insert(sample)
+
+    //         const instructorClasses = await Users.findClassesByInstructor(1)
+
+    //         expect(instructorClasses).toHaveLength(1)
+    //     });
+        
+    // });
+    
     
     
     

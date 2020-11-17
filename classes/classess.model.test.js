@@ -8,8 +8,9 @@ const sample = {
     "end_time":"09:00",
     "intensity":5,
     "location":"test location",
-    "num_attendies":5,
-    "max_size":9
+    "enrolled":5,
+    "max_size":9,
+    "instructor_id":1
 }
 
 beforeEach(async () => {
