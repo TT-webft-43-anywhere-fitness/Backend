@@ -55,9 +55,16 @@ router.post("/login", validateBody, (req, res) => {
   if (isValid(req.body)) {
     Users.findBy({ username: username })
       .then(([user]) => {
+          console.log(user)
         if (user && bcryptjs.compareSync(password, user.password)) {
           const token = makeToken(user) 
-          res.status(200).json({ message: "Welcome to our API", token }); 
+          res.status(200).json(
+              {
+                id:user.id,
+                role:user.role, 
+                message: `Welcome to our API ${user.username}`, 
+                token 
+            }); 
         } else {
           res.status(401).json({ message: "Invalid credentials" });
         }
@@ -72,16 +79,14 @@ router.post("/login", validateBody, (req, res) => {
   }
 });
 
-// helper to make the token using the user from db as raw material
 function makeToken(user) {
   const payload = {
     subject: user.id,
     username: user.username,
     role: user.role,
-    foo: 'bar',
   };
   const options = {
-    expiresIn: '25 seconds',
+    expiresIn: '30 minutes',
   };
   return jwt.sign(payload, jwtSecret, options);
 }
