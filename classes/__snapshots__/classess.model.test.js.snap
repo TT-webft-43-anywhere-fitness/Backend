@@ -5,7 +5,7 @@ Object {
   "class_name": "test name",
   "end_time": "09:00",
   "id": 1,
-  "instructor_id": null,
+  "instructor_id": 1,
   "intensity": 5,
   "location": "test location",
   "max_size": 9,

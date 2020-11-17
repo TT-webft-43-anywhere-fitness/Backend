@@ -9,7 +9,8 @@ const sample = {
     "intensity":5,
     "location":"test location",
     "num_attendies":5,
-    "max_size":9
+    "max_size":9,
+    "instructor_id":1
 }
 
 beforeEach(async () => {

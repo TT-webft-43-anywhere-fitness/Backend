@@ -10,7 +10,7 @@ const doug = {username:"Doug", password:"guest", role:1}
 const archer = {username:"Archer", password:"guest"}
 
 describe('users model', () => {
-    describe('find()', () => {
+    describe('getAll()', () => {
         it('returns an empty array', async () => {
             const users = await User.getAll()
             // console.log("THIS IS THE RESULT OF USERS ===>",users)
@@ -44,6 +44,14 @@ describe('users model', () => {
         });
         
     });
+
+    describe('findClassesByInstructor(instrutorId)', () => {
+        it('finds classes that an instructor has. ', () => {
+            
+        });
+        
+    });
+    
     
     
     

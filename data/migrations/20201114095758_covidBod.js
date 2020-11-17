@@ -55,9 +55,10 @@ exports.up = function(knex) {
         tbl.time("end_time").notNullable();
         tbl.integer("intensity").unsigned().notNullable();
         tbl.string("location").notNullable();
-        tbl.integer("num_attendies").unsigned().notNullable();
+        tbl.integer("enrolled").unsigned().notNullable();
         tbl.integer("max_size").unsigned().notNullable();
         tbl.integer("instructor_id")
+            .notNullable()
             .unsigned()
             .references("users.id")
             .onDelete("RESTRICT")

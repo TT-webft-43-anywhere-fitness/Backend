@@ -4,7 +4,8 @@ module.exports = {
     add,
     getAll,
     findById,
-    findBy
+    findBy,
+    findClassesByInstructor
 }
 
 async function add(user){
@@ -21,4 +22,8 @@ function findById(id){
 }
 function findBy(filter){
     return db('users').where(filter).orderBy("id")
+}
+
+function findClassesByInstructor(instructorId){
+    return null
 }

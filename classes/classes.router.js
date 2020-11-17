@@ -46,7 +46,7 @@ const validateBody = (req,res,next) => {
 
 
 
-router.post('/', validateBody, (req,res) => {
+router.post('/', validateId,validateBody, (req,res) => {
     Classes.insert(req.bodyObj)
     .then(data => {
         res.status(201).json(data)
