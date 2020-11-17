@@ -46,7 +46,7 @@ const validateBody = (req,res,next) => {
 
 
 
-router.post('/', validateId,validateBody, (req,res) => {
+router.post('/',validateBody, (req,res) => {
     Classes.insert(req.bodyObj)
     .then(data => {
         res.status(201).json(data)
@@ -96,3 +96,4 @@ router.use((err, req, res, next) => {
 });
 
 module.exports = router
+

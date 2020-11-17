@@ -24,6 +24,6 @@ function findBy(filter){
     return db('users').where(filter).orderBy("id")
 }
 
-function findClassesByInstructor(instructorId){
-    return null
+function findClassesByInstructor(instructor_id){
+    return db('classes').where({instructor_id})
 }
