@@ -5,8 +5,10 @@ module.exports = {
   update,
   remove,
   getAll,
-  getByInstructor,
   findById,
+  enrollAttendee,
+  getAttendeesByClass,
+  removeAttendee
 };
 
 // async, adds a nwe class and then returns the new class obj added
@@ -29,17 +31,51 @@ function remove(id) {
 
 // gets all of the classes returned JOINED with the attendies matching it
 function getAll() {
-  return db('classes');
+  return db('classes as c').join("users","c.instructor_id","users.id").select("users.username as instructor",
+  "c.class_name",
+  "c.type",
+  "c.start_time",
+  "c.end_time",
+  "c.intensity",
+  "c.location",
+  "c.enrolled",
+  "c.max_size",
+  );
 }
 
-// gets all of the classes back that match the instructor id. 
-//JOINS the attentees that match them
-function getByInstructor(instructorId){
-    
-}
+
 
 // find a class with the specified id
 //Joins the attendees that match
 function findById(id) {
-  return db("classes").where({id}).first();
+  return db("classes as c").where({"c.id":id}).first()
+  .join("users","c.instructor_id","users.id")
+  .select(
+    "users.username as instructor",
+    "c.class_name",
+    "c.type",
+    "c.start_time",
+    "c.end_time",
+    "c.intensity",
+    "c.location",
+    "c.enrolled",
+    "c.max_size",
+  );
+}
+
+// ATTENDEES ENDPOINTS
+async function enrollAttendee(user_id,class_id){
+  const [id] = await db("attendees_by_class").insert({user_id,class_id})
+  // const newAttendee = await db.insert("attendees_by_class as a").where({id}).join("users","a.user_id","users.id")
+  return id
+}
+async function getAttendeesByClass(class_id){
+  const attendeesArr = await db("attendees_by_class as a").where({class_id}).join("users","a.user_id","users.id")
+
+  return attendeesArr
+}
+
+async function removeAttendee(user_id,class_id){
+  const [id] = await db("attendee_by_class").where({user_id,class_id}).first()
+  return await db("attendees_by_class").where({id}).delete()
 }

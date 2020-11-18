@@ -68,7 +68,38 @@ describe('classes model', () => {
         });
         
     });
+
+    describe('enrollAttendee(user_id,class_id)', () => {
+        it('adds a user to a class', async () => {
+            const test = await db("classes").insert(sample)
+            await Classes.enrollAttendee(1,test.id)
+            const attendArr = db("attendees_by_class").where({class_id:test.id})
+
+            expect(attendArr).toHaveLength(1)
+        });
+        
+    });
     
+
+    describe('getAttendeesByClass(class_id)', () => {
+        it('retreieves all the attendeess for a class and returns an array of them', async () => {
+            const test = await db("classes").insert(sample)
+            await db("attendees_by_class").insert({class_id:test.id,user_id:1})
+            const attendArr = await Classes.getAttendeesByClass(test.id)
+
+            expect(attendArr).toHaveLength(1)
+        });
+        
+    });
+
+    // describe('removeAttendee(user_id,class_id)', () => {
+    //     it('removes an attendee from the table', async() => {
+            
+    //     });
+        
+    // });
+    
+      
     
     
     

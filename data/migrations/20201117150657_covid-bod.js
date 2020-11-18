@@ -68,12 +68,14 @@ exports.up = function(knex) {
         tbl.increments();
         tbl.integer("class_id",128)
             .unsigned()
-            .references("classes.id")
+            .references("id")
+            .inTable("classes")
             .onDelete("RESTRICT")
             .onUpdate("CASCADE");
         tbl.integer("user_id",128)
             .unsigned()
-            .references("users.id")
+            .references("id")
+            .inTable("users")
             .onDelete("RESTRICT")
             .onUpdate("CASCADE");
     })
