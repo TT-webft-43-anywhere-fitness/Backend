@@ -72,7 +72,7 @@ router.get('/:id', validateId,validateBody, (req,res) => {
 })
 
 router.put('/:id', validateId, validateBody, (req,res) => {
-    Classes.update(req.id,req.body)
+    Classes.update(req.params.id,req.body)
     .then(data => {
         res.status(201).json(data)
     })
