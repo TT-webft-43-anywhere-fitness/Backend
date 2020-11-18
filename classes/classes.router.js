@@ -84,7 +84,7 @@ router.put('/:id', validateId, validateBody, (req,res) => {
 router.delete('/:id', validateId, (req,res) => {
     Classes.remove(req.params.id)
     .then(data => {
-        res.status(200).json(req.params.id)
+        res.status(200).json({id:req.params.id})
     })
     .catch(error => {
         res.status(500).json({message:error.message})
