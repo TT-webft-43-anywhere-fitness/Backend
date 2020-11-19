@@ -48,6 +48,7 @@ const validateBody = (req,res,next) => {
 
 
 router.post('/',validateBody, (req,res) => {
+    console.log(req.bodyObj)
     Classes.insert(req.bodyObj)
     .then(data => {
         res.status(201).json(data)

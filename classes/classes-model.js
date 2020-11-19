@@ -31,15 +31,17 @@ function remove(id) {
 
 // gets all of the classes returned JOINED with the attendies matching it
 function getAll() {
-  return db('classes as c').join("users","c.instructor_id","users.id").select("users.username as instructor",
-  "c.class_name",
-  "c.type",
-  "c.start_time",
-  "c.end_time",
-  "c.intensity",
-  "c.location",
-  "c.enrolled",
-  "c.max_size",
+  return db('classes as c').join("users","c.instructor_id","users.id").select(
+    "users.username as instructor",
+    "c.id",
+    "c.class_name",
+    "c.type",
+    "c.start_time",
+    "c.end_time",
+    "c.intensity",
+    "c.location",
+    "c.enrolled",
+    "c.max_size",
   );
 }
 
@@ -52,6 +54,7 @@ function findById(id) {
   .join("users","c.instructor_id","users.id")
   .select(
     "users.username as instructor",
+    "c.id",
     "c.class_name",
     "c.type",
     "c.start_time",
@@ -67,6 +70,9 @@ function findById(id) {
 async function enrollAttendee(user_id,class_id){
   const [id] = await db("attendees_by_class").insert({user_id,class_id})
   // const newAttendee = await db.insert("attendees_by_class as a").where({id}).join("users","a.user_id","users.id")
+  // const total = await db("attendees_by_class").
+  // const classObj = await db("classes").where({class_id}).first()
+  // await db("classes").where({id:classObj.id}).update({enrolled:classObj.enrolled+1})
   return id
 }
 async function getAttendeesByClass(class_id){
@@ -77,5 +83,7 @@ async function getAttendeesByClass(class_id){
 
 async function removeAttendee(user_id,class_id){
   const [id] = await db("attendee_by_class").where({user_id,class_id}).first()
+  // const classObj = await db("classes").where({class_id}).first()
+  // await db("classes").where({id:classObj.id}).update({enrolled:classObj.enrolled+1})
   return await db("attendees_by_class").where({id}).delete()
 }
