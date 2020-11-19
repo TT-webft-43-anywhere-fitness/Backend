@@ -76,7 +76,7 @@ async function enrollAttendee(user_id,class_id){
   return id
 }
 async function getAttendeesByClass(class_id){
-  const attendeesArr = await db("attendees_by_class as a").where({class_id}).join("users","a.user_id","users.id")
+  const attendeesArr = await db("attendees_by_class as a").where({class_id}).join("users","a.user_id","users.id").select("users.username")
 
   return attendeesArr
 }
